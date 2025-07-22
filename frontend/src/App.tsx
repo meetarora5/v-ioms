@@ -6,6 +6,7 @@ import Orders from './pages/Orders'
 import Customers from './pages/Customers'
 import AddCustomer from './pages/AddCustomer'
 import EditCustomer from './pages/EditCustomer'
+import Footer from './components/Footer'
 import {Routes,Route} from 'react-router-dom'
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/customer/add" element={<AddCustomer />} />
         <Route path="/customer/edit/:id" element={<EditCustomer />} />
       </Routes>
+      <Footer />
     </>
   )
 }
