@@ -10,7 +10,7 @@ type Product = {
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
  
-  // Dummy data for now – replace with API call if needed
+  // Dummy data for now replace with API call if needed
   useEffect(() => {
     setProducts([
       {

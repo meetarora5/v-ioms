@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import api from "../Api";
 import {useState} from 'react'
 
@@ -5,11 +6,23 @@ const Register = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await api.post('/register/', { username, email, password });
+            const response = await api.post('/register/', { 
+                user: {
+                    username, email, password
+                }
+            });
+            if (response.status === 201) {
+                alert('Registration successful! You can now log in.');
+                setUsername('');
+                setEmail('');
+                setPassword('');
+                navigate('/login');
+            }
             console.log(response.data);
         } catch (error) {
             console.error(error);
@@ -25,7 +38,7 @@ const Register = () => {
                     <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} className="px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-400" />
                     <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-400" />
                     <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-400" />
-                    <button type="submit" className="mt-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 rounded transition-colors">Register</button>
+                    <button type="submit" className="mt-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 rounded transition-colors cursor-pointer">Register</button>
                 </form>
             <p className="text-center text-gray-600">Already have an account? <a href="/login" className="text-purple-600 hover:underline">Login</a>.</p>
             </div>

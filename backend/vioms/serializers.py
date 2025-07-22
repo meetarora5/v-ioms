@@ -43,8 +43,34 @@ class AdminUserSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
     
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = '__all__'
 
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
         fields = '__all__'
+
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = '__all__'
+class OrderItemSerializer(serializers.ModelSerializer):
+    product = ProductSerializer(read_only=True)
+
+    class Meta:
+        model = OrderItem
+        fields = '__all__'
+    #     read_only_fields = ['product']
+    
+    # def create(self, validated_data):
+    #     order_item = OrderItem.objects.create(**validated_data)
+    #     return order_item
+
+    # def update(self, instance, validated_data):
+    #     instance.quantity = validated_data.get('quantity', instance.quantity)
+    #     instance.save()
+    #     return instance
+    

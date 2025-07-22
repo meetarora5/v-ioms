@@ -22,7 +22,7 @@ const Login = () => {
                 <form className="flex flex-col gap-4" onSubmit={handleLogin}>
                     <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-400" />
                     <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-400" />
-                    <button type="submit" className="mt-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 rounded transition-colors">Register</button>
+                    <button type="submit" className="mt-2 bg-purple-600 hover:bg-purple-700 text-white cursor-pointer font-semibold py-2 rounded transition-colors">Register</button>
                 </form>
             <p className="text-center text-gray-600">Don't have an account? <a href="/" className="text-purple-600 hover:underline">Register</a>.</p>
             </div>
