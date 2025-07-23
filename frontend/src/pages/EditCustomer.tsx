@@ -51,7 +51,7 @@ function EditCustomer() {
         axios.put(`http://localhost:8000/api/customers/${id}/`, customer)
             .then(() => {
                 alert("Customer updated successfully!");
-                navigate("/customer/");
+                navigate("/customers/");
             })
             .catch((err) => {
                 console.error("Error updating customer:", err);
