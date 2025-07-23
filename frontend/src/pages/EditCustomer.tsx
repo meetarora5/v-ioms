@@ -4,20 +4,20 @@ import axios from "axios";
  
  
 interface CustomerForm {
-  first_name: string;
-  last_name: string;
+  name: string;
   email: string;
-  phone_number: string;
+  phone: string;
+  address: string;
 }
  
 function EditCustomer() {
  
     const { id }=useParams();
     const [customer, setCustomer] = useState<CustomerForm>({
-        first_name: "",
-        last_name: "",
+        name: "",
         email: "",
-        phone_number: ""
+        phone: "",
+        address: ""
     });
     const [loading, setLoading] = useState<boolean>(true);
     const navigate = useNavigate();
@@ -69,22 +69,11 @@ function EditCustomer() {
                 <h2 className="text-2xl font-bold mb-4">Edit Customer</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                    <label className="block font-medium">First Name</label>
+                    <label className="block font-medium">Full Name</label>
                     <input
                         type="text"
-                        name="first_name"
-                        value={customer.first_name}
-                        onChange={handleChange}
-                        className="w-full border px-3 py-2 rounded"
-                        required
-                    />
-                    </div>
-                    <div>
-                    <label className="block font-medium">Last Name</label>
-                    <input
-                        type="text"
-                        name="last_name"
-                        value={customer.last_name}
+                        name="name"
+                        value={customer.name}
                         onChange={handleChange}
                         className="w-full border px-3 py-2 rounded"
                         required
@@ -105,8 +94,19 @@ function EditCustomer() {
                     <label className="block font-medium">Phone Number</label>
                     <input
                         type="text"
-                        name="phone_number"
-                        value={customer.phone_number}
+                        name="phone"
+                        value={customer.phone}
+                        onChange={handleChange}
+                        className="w-full border px-3 py-2 rounded"
+                        required
+                    />
+                    </div>
+                    <div>
+                    <label className="block font-medium">Address</label>
+                    <input
+                        type="text"
+                        name="address"
+                        value={customer.address}
                         onChange={handleChange}
                         className="w-full border px-3 py-2 rounded"
                         required

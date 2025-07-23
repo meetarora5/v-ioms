@@ -7,6 +7,7 @@ import Customers from './pages/Customers'
 import AddCustomer from './pages/AddCustomer'
 import EditCustomer from './pages/EditCustomer'
 import Footer from './components/Footer'
+import AddProduct from './pages/AddProduct'
 import {Routes,Route} from 'react-router-dom'
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/products" element={<Products />} />
+        <Route path='/product/add' element={<AddProduct />} />
         {/* Add other routes as needed */}
         <Route path="/orders" element={<Orders />} />
         <Route path="/customers" element={<Customers />} />

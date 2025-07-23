@@ -4,18 +4,18 @@ import axios from "axios";
 const API_BASE = "http://localhost:8000/api";
  
 interface CustomerForm {
-  first_name: string;
-  last_name: string;
+  name: string;
   email: string;
-  phone_number: string;
+  phone: string;
+  address: string;
 }
  
 const AddCustomer = () => {
   const [form, setForm] = useState<CustomerForm>({
-    first_name: "",
-    last_name: "",
+    name: "",
     email: "",
-    phone_number: ""
+    phone: "",
+    address: ""
   });
   const [submitting, setSubmitting] = useState<boolean>(false);
  
@@ -31,10 +31,10 @@ const AddCustomer = () => {
       .then(() => {
         alert("Customer added!");
         setForm({
-          first_name: "",
-          last_name: "",
+          name: "",
           email: "",
-          phone_number: ""
+          phone: "",
+          address: ""
         });
       })
       .catch(() => {
@@ -47,18 +47,9 @@ const AddCustomer = () => {
     <form className="max-w-md mx-auto mt-8 p-4 bg-white rounded shadow" onSubmit={handleSubmit}>
       <input
         type="text"
-        name="first_name"
-        placeholder="First Name"
-        value={form.first_name}
-        onChange={handleChange}
-        className="border p-2 rounded w-full mb-2"
-        required
-      />
-      <input
-        type="text"
-        name="last_name"
-        placeholder="Last Name"
-        value={form.last_name}
+        name="name"
+        placeholder="Full Name"
+        value={form.name}
         onChange={handleChange}
         className="border p-2 rounded w-full mb-2"
         required
@@ -74,9 +65,18 @@ const AddCustomer = () => {
       />
       <input
         type="text"
-        name="phone_number"
+        name="phone"
         placeholder="Phone Number"
-        value={form.phone_number}
+        value={form.phone}
+        onChange={handleChange}
+        className="border p-2 rounded w-full mb-2"
+        required
+      />
+      <input
+        type="text"
+        name="address"
+        placeholder="Address"
+        value={form.address}
         onChange={handleChange}
         className="border p-2 rounded w-full mb-2"
         required

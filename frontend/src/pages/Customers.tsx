@@ -16,13 +16,13 @@ interface Customer {
 
   id: number;
 
-  first_name: string;
-
-  last_name: string;
+  name: string;
 
   email: string;
 
-  phone_number: string;
+  phone: string;
+
+  address: string;
 
 }
 
@@ -152,6 +152,8 @@ const Customers: React.FC = () => {
 
                 <th className="border-b pb-2">Phone</th>
 
+                <th className="border-b pb-2">Address</th>
+
                 <th className="border-b pb-2">Actions</th>
 
               </tr>
@@ -164,11 +166,13 @@ const Customers: React.FC = () => {
 
                 <tr key={customer.id}>
 
-                  <td className="py-1">{customer.first_name} {customer.last_name}</td>
+                  <td className="py-1">{customer.name}</td>
 
                   <td>{customer.email}</td>
 
-                  <td>{customer.phone_number}</td>
+                  <td>{customer.phone}</td>
+
+                  <td>{customer.address}</td>
 
                   <td className="space-x-2">
 
