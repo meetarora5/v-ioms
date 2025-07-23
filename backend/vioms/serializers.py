@@ -42,6 +42,15 @@ class AdminUserSerializer(serializers.ModelSerializer):
 
         instance.save()
         return instance
+
+class LoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField(write_only=True)
+    # def validate(self, data):
+    #     user = User.objects.filter(username=data['username']).first()
+    #     if user and user.check_password(data['password']):
+    #         return user
+    #     raise serializers.ValidationError("Invalid credentials")
     
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
@@ -83,10 +92,18 @@ class OrderSerializer(serializers.ModelSerializer):
         order = Order.objects.create(**validated_data)
 
         for item in items_data:
+            product = item['product']
+            quantity = item['quantity']
+            # Reduce product quantity
+            if product.quantity >= quantity:
+                product.quantity -= quantity
+                product.save()
+            else:
+                raise serializers.ValidationError(f"Not enough stock for product {product.product_name}")
             OrderItem.objects.create(
                 order=order,
-                product=item['product'],
-                quantity=item['quantity']
+                product=product,
+                quantity=quantity
             )
         return order
     #     read_only_fields = ['product']

@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 
 const navLinks = [
+  { name: 'Dashboard', href: '/dash' },
   { name: 'Products', href: '/products' },
   { name: 'Orders', href: '/orders' },
   { name: 'Customers', href: '/customers' },

@@ -43,6 +43,7 @@ EXTERNAL_APPS = [
     'vioms',
     'corsheaders',
     'rest_framework_simplejwt',
+    'rest_framework.authtoken',
 ]
 INSTALLED_APPS += EXTERNAL_APPS
 MIDDLEWARE = [
@@ -61,6 +62,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authtoken.authentication.TokenAuthentication',
     ),
 }
 ROOT_URLCONF = 'backend.urls'
