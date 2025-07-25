@@ -1,4 +1,5 @@
 import ResponsiveAppBar from './components/ResponsiveAppBar'
+import PrivateRoute from './components/PrivateRoute'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import Products from './pages/Products'
@@ -19,17 +20,17 @@ function App() {
       <Routes>
         <Route path="/" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/products" element={<Products />} />
-        <Route path='/product/add' element={<AddProduct />} />
-        <Route path='/product/edit/:id' element={<EditProduct />} />
+        <Route path="/products" element={<PrivateRoute><Products /></PrivateRoute>} />
+        <Route path='/product/add' element={<PrivateRoute><AddProduct /></PrivateRoute>} />
+        <Route path='/product/edit/:id' element={<PrivateRoute><EditProduct /></PrivateRoute>} />
         {/* Add other routes as needed */}
-        <Route path="/orders" element={<Orders />} />
-        <Route path="/customers" element={<Customers />} />
-        <Route path="/customer/add" element={<AddCustomer />} />
-        <Route path="/customer/edit/:id" element={<EditCustomer />} />
-        <Route path="/orders" element={<Orders />} />
-        <Route path="/order/add" element={<AddOrder />} />
-        <Route path="/dash" element={<Dashboard />} />
+        <Route path="/orders" element={<PrivateRoute><Orders /></PrivateRoute>} />
+        <Route path="/customers" element={<PrivateRoute><Customers /></PrivateRoute>} />
+        <Route path="/customer/add" element={<PrivateRoute><AddCustomer /></PrivateRoute>} />
+        <Route path="/customer/edit/:id" element={<PrivateRoute><EditCustomer /></PrivateRoute>} />
+        <Route path="/orders" element={<PrivateRoute><Orders /></PrivateRoute>} />
+        <Route path="/order/add" element={<PrivateRoute><AddOrder /></PrivateRoute>} />
+        <Route path="/dash" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
       </Routes>
       <Footer />
     </>

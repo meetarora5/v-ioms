@@ -42,7 +42,7 @@ EXTERNAL_APPS = [
     'rest_framework',
     'vioms',
     'corsheaders',
-    'rest_framework_simplejwt',
+    # 'rest_framework_simplejwt',
     'rest_framework.authtoken',
 ]
 INSTALLED_APPS += EXTERNAL_APPS
@@ -61,9 +61,11 @@ CORS_ALLOW_ALL_ORIGINS = True
 # AUTH_USER_MODEL = 'vioms.CustomUser'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-        'rest_framework.authtoken.authentication.TokenAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ),
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ),
 }
 ROOT_URLCONF = 'backend.urls'
 

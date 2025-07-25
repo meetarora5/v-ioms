@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
- 
+import api from "../Api"; 
  
 const API_BASE = "http://localhost:8000/api";
  
@@ -38,8 +37,8 @@ const AddOrder: React.FC = () => {
     fetchCustomers();
   }, []);
     const fetchProducts = () => {
-        const token = sessionStorage.getItem("token");
-        axios
+        const token = localStorage.getItem("token");
+        api
           .get<Product[]>(`${API_BASE}/products/`,{
             headers: {
               Authorization: `Token ${token}`
@@ -55,8 +54,8 @@ const AddOrder: React.FC = () => {
       };
  
     const fetchCustomers = () => {
-      const token = sessionStorage.getItem("token");
-      axios
+      const token = localStorage.getItem("token");
+      api
         .get<Customer[]>(`${API_BASE}/customers/`,{
           headers: {
             Authorization: `Token ${token}`
@@ -109,6 +108,7 @@ const AddOrder: React.FC = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Token ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify(orderData),
       });

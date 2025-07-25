@@ -16,13 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from vioms import urls as vioms_urls
 from .routers import urlpatterns
-from django.urls import re_path
-from django.views.generic import TemplateView
+from rest_framework.authtoken.views import obtain_auth_token
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', include(vioms_urls)),
     path('api/',include(urlpatterns)),
+    path('api/login/', obtain_auth_token, name='api_token_auth'),
     # re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),
 ]

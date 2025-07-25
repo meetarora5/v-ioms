@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-
+// import axios from "axios";
+import api from '../Api';
 const API_BASE = "http://localhost:8000/api";
 
 type Metrics = {
@@ -21,8 +21,8 @@ const Dashboard = () => {
   useEffect(() => {
     // Replace with real API calls
     Promise.all([
-      axios.get(`${API_BASE}/orders/`),
-      axios.get(`${API_BASE}/products/`)
+      api.get(`${API_BASE}/orders/`),
+      api.get(`${API_BASE}/products/`)
     ]).then(([ordersRes, productsRes]) => {
       const orders = ordersRes.data;
       const products = productsRes.data;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-
+// import axios from "axios";
+import api from '../Api'
 const API_BASE = "http://localhost:8000/api";
 type Product = {
   id: number;
@@ -49,14 +49,12 @@ const Products = () => {
     // ]);
   }, []);
   const fetchProducts = () =>{
-    axios
-      .get
-      <Product[]>(`${API_BASE}/products/`)
+    api
+      .get<Product[]>(`${API_BASE}/products/`)
       .then((res) => {
         setProducts(res.data);
         setLoading(false);
-      }
-      )
+      })
       .catch((err) => {
         console.error("Error fetching products:", err);
         setLoading(false);
@@ -67,8 +65,7 @@ const Products = () => {
 
     if (!window.confirm("Are you sure you want to delete this product?")) return;
 
-    axios
-
+    api
       .delete(`${API_BASE}/products/${id}/`)
 
       .then(() => {

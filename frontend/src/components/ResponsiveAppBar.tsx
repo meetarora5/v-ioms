@@ -8,8 +8,17 @@ const navLinks = [
   { name: 'Customers', href: '/customers' },
 ];
 
+import { useNavigate } from 'react-router-dom';
+
 const ResponsiveAppBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const token=localStorage.getItem('token')
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
 
   return (
     <nav className="bg-gradient-to-r from-purple-700 to-blue-500 shadow-lg">
@@ -30,7 +39,19 @@ const ResponsiveAppBar: React.FC = () => {
                 </a>
               ))}
             </div>
+            {token && <button
+              onClick={handleLogout}
+              className="ml-4 bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer"
+            >
+              Logout
+            </button>}
           </div>
+          {token && <button
+            onClick={handleLogout}
+            className="ml-4 bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm font-medium transition-colors md:hidden cursor-pointer"
+          >
+            Logout
+          </button>}
           <div className="-mr-2 flex md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
- 
+// import axios from "axios";
+import api from '../Api'; 
  
 interface CustomerForm {
   name: string;
@@ -24,7 +24,7 @@ function EditCustomer() {
     const [saving, setSaving] = useState<boolean>(false);
  
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/customers/${id}/`)
+        api.get(`http://localhost:8000/api/customers/${id}/`)
             .then((res) => {
                 setCustomer(res.data);
                 setLoading(false);
@@ -48,7 +48,7 @@ function EditCustomer() {
     const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault ();
         setSaving(true);
-        axios.put(`http://localhost:8000/api/customers/${id}/`, customer)
+        api.put(`http://localhost:8000/api/customers/${id}/`, customer)
             .then(() => {
                 alert("Customer updated successfully!");
                 navigate("/customers/");

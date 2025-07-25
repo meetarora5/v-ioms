@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
-
+// import axios from "axios";
+import api from '../Api';
 interface ProductForm {
   product_name: string;
   sku: string;
@@ -24,7 +24,7 @@ const EditProduct = () => {
   const [saving, setSaving] = useState<boolean>(false);
   useEffect(() => {
     // Fetch product details by ID
-    axios
+    api
       .get<ProductForm>(`http://localhost:8000/api/products/${id}/`)
       .then((res) => {
         setFormData(res.data);
@@ -46,7 +46,7 @@ const EditProduct = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSaving(true);
-    axios
+    api
       .put(`http://localhost:8000/api/products/${id}/`, formData)
       .then(() => {
         alert("Product updated successfully.");

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from '../Api';
+const API_BASE = "http://localhost:8000/api";
 interface Product {
   id: number;
   product_name: string;
@@ -24,15 +26,14 @@ const Orders: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const res = await fetch("http://localhost:8000/api/orders/");
-        const data = await res.json();
-        setOrders(data);
-        console.log("Orders fetched:", data);
-      } catch (error) {
-        console.error("Error fetching orders:", error);
-      }
+    const fetchOrders = () => {
+      api.get(`${API_BASE}/orders/`)
+        .then((res) => {
+          setOrders(res.data);
+        })
+        .catch((err) => {
+          console.error("Error fetching orders:", err);
+        });
     };
  
     fetchOrders();

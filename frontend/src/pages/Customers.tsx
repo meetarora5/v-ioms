@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import axios from "axios";
-
+// import axios from "axios";
+import api from '../Api';
 import { useNavigate } from "react-router-dom";
 
  
@@ -48,7 +48,7 @@ const Customers: React.FC = () => {
 
   const fetchCustomers = () => {
 
-    axios
+    api
 
       .get<Customer[]>(`${API_BASE}/customers/`)
 
@@ -76,9 +76,8 @@ const Customers: React.FC = () => {
 
     if (!window.confirm("Are you sure you want to delete this customer?")) return;
 
- 
 
-    axios
+    api
 
       .delete(`${API_BASE}/customers/${id}/`)
 

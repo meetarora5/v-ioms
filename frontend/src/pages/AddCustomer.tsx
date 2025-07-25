@@ -1,6 +1,6 @@
 import  React,{ useState  } from "react";
-import axios from "axios";
- 
+// import axios from "axios";
+import api from '../Api'; 
 const API_BASE = "http://localhost:8000/api";
  
 interface CustomerForm {
@@ -26,7 +26,7 @@ const AddCustomer = () => {
   const handleSubmit = (e :React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
-    axios
+    api
       .post(`${API_BASE}/customers/`, form)
       .then(() => {
         alert("Customer added!");
@@ -37,10 +37,12 @@ const AddCustomer = () => {
           address: ""
         });
       })
-      .catch(() => {
+      .catch((error) => {
+        console.error("Error response:", error.response?.data);
         alert("Error adding customer");
       })
       .finally(() => setSubmitting(false));
+
   };
  
   return (
