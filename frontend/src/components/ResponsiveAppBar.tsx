@@ -28,7 +28,7 @@ const ResponsiveAppBar: React.FC = () => {
             <a href="/" className="flex-shrink-0 text-white font-bold text-2xl tracking-widest">IOMS</a>
           </div>
           <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
+            <div className="mr-36 flex items-baseline space-x-4">
               {navLinks.map((link) => (
                 <a
                   key={link.name}

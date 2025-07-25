@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from '../Api';
+import axios from "axios";
 const API_BASE = "http://localhost:8000/api";
 interface Product {
   id: number;
@@ -23,10 +24,14 @@ interface Order {
  
 const Orders: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
+  const [updatingStatusId, setUpdatingStatusId] = useState<string | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchOrders = () => {
+ 
+    fetchOrders();
+  }, []);
+      const fetchOrders = () => {
       api.get(`${API_BASE}/orders/`)
         .then((res) => {
           setOrders(res.data);
@@ -35,17 +40,44 @@ const Orders: React.FC = () => {
           console.error("Error fetching orders:", err);
         });
     };
- 
-    fetchOrders();
-  }, []);
- 
   const calculateTotal = (items: OrderItem[]) => {
     return items.reduce((total, item) => {
       const price = parseFloat(item.product.price);
       return total + price * item.quantity;
     }, 0);
   };
+  const handleStatusChange = (orderId: string, newStatus: string) => {
+    setUpdatingStatusId(orderId);
  
+    axios.patch(
+      `http://localhost:8000/api/orders/${orderId}/`,
+      { status: newStatus },
+      {
+        headers: { Authorization: `Token ${localStorage.getItem("token")}` },
+      }
+    )
+      .then(() => {
+        alert("Order updated successfully!");
+        fetchOrders(); // Refresh the order list
+      })
+      .catch((err) => {
+        console.error("Error updating order:", err);
+        alert("Failed to update order.");
+      })
+      .finally(() => {
+        setUpdatingStatusId(null);
+      });
+  };
+  const getNextStatuses = (currentStatus: string): string[] => {
+    const transitions: { [key: string]: string[] } = {
+      PENDING: ["PENDING", "PROCESSING", "CANCELED"],
+      PROCESSING: ["PROCESSING", "SHIPPED", "DELIVERED", "CANCELED"],
+      SHIPPED: ["SHIPPED", "DELIVERED"],
+      DELIVERED: ["DELIVERED"],
+      CANCELED: ["CANCELED"],
+    };
+    return transitions[currentStatus] || [currentStatus];
+  };
   return (
     <div className="p-4 max-w-3xl mx-auto">
       <h2 className="text-2xl font-bold mb-4">All Orders</h2>
@@ -103,7 +135,20 @@ const Orders: React.FC = () => {
                         {item.status}
                       </span>
                     </td> */}
-                    <td className="px-2 py-1 border">{order.status}</td>
+                    <td className="px-2 py-1 border">
+                      <select
+                        value={order.status}
+                        disabled={updatingStatusId === order.id}
+                        onChange={(e) => handleStatusChange(order.id, e.target.value)}
+                        className="border p-1 rounded gap-1.5 m-2"
+                      >
+                        {getNextStatuses(order.status).map((status) => (
+                          <option key={status} value={status}>
+                            {status}
+                          </option>
+                        ))}
+                      </select>
+                    </td>
                   </tr>
                 ))}
               </tbody>

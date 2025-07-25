@@ -146,12 +146,12 @@ const Products = () => {
                   </td>
                   <td className="border-b pb-2">
                     <button
-                      className="text-blue-600 hover:underline"
+                      className="bg-green-600 text-white px-2 py-1 rounded text-xs hover:bg-green-400 hover:text-black transition-all duration-300 cursor-pointer"
                       onClick={() => navigate(`/product/edit/${product.id}`)}
                     >
                       Edit
                     </button>
-                    <button className="text-red-600 hover:underline" onClick={() => handleDelete(product.id)}>
+                    <button className="bg-red-600 text-white ml-4 px-2 py-1 rounded text-xs hover:bg-red-400 hover:text-black transition-all duration-300 cursor-pointer" onClick={() => handleDelete(product.id)}>
                       Delete
                     </button>
                   </td>

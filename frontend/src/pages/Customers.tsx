@@ -177,7 +177,7 @@ const Customers: React.FC = () => {
 
                     <button
 
-                      className="bg-green-600 text-white px-2 py-1 rounded text-xs hover:bg-green-400 hover:text-black transition-all duration-300"
+                      className="bg-green-600 text-white px-2 py-1 rounded text-xs hover:bg-green-400 hover:text-black transition-all duration-300 cursor-pointer"
 
                       onClick={() => handleEdit(customer.id)}
 
@@ -189,7 +189,7 @@ const Customers: React.FC = () => {
 
                     <button
 
-                      className="bg-red-600 text-white px-2 py-1 rounded text-xs hover:bg-red-400 hover:text-black transition-all duration-300"
+                      className="bg-red-600 text-white px-2 py-1 rounded text-xs hover:bg-red-400 hover:text-black transition-all duration-300 cursor-pointer"
 
                       onClick={() => handleDelete(customer.id)}
 

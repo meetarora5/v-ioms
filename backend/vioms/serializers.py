@@ -106,6 +106,11 @@ class OrderSerializer(serializers.ModelSerializer):
                 quantity=quantity
             )
         return order
+    def update(self, instance, validated_data):
+        instance.status = validated_data.get('status', instance.status)
+        instance.save()
+
+        return instance
     #     read_only_fields = ['product']
     
     # def create(self, validated_data):
