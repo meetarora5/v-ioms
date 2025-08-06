@@ -1,0 +1,39 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: django_container
+    # volumes:
+    #   - ./backend:/app
+    ports:
+      - "8000:8000"
+    networks:
+      - "my_network"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: front_container
+    ports:
+      - "3000:80"
+    networks:
+      - "my_network"
+networks:
+  my_network:
+    driver: bridge
+
+
+    
+#   db:
+#     image: postgres:15
+#     environment:
+#       POSTGRES_DB: mydb
+#       POSTGRES_USER: myuser
+#       POSTGRES_PASSWORD: mypassword
+#     volumes:
+#       - pgdata:/var/lib/postgresql/data
+
+# volumes:
+#   pgdata:
