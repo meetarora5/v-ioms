@@ -16,8 +16,10 @@ const ResponsiveAppBar: React.FC = () => {
   const token=localStorage.getItem('token')
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/login');
+    if (window.confirm("Are you sure you want to logout?")) {
+      localStorage.removeItem('token');
+      navigate('/login');
+    }
   };
 
   return (
@@ -38,13 +40,13 @@ const ResponsiveAppBar: React.FC = () => {
                   {link.name}
                 </a>
               ))}
-            </div>
-            {token && <button
+              {token && <button
               onClick={handleLogout}
               className="ml-4 bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer"
-            >
+              >
               Logout
             </button>}
+            </div>
           </div>
           {token && <button
             onClick={handleLogout}
